@@ -3,8 +3,6 @@ import {
 	PCFSoftShadowMap,
 } from './three.module.js'
 
-import camera from './CAMERA.js'
-
 
 
 const set_renderer = r => {  // for scaling resolution up or down
