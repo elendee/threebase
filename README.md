@@ -5,7 +5,7 @@ threejs scaffolding
 
 You can then share `custom.js` files with friends for quick collaboration.
 
-Copy this template to get started:
+Copy this sample `custom.js` template to get started:
 ```js
 import * as THREE from './scaffold/three.module.js'
 import SCENE from './scaffold/SCENE.js'
