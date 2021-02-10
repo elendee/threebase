@@ -15,7 +15,7 @@ const set_renderer = r => {  // for scaling resolution up or down
 	)
 }
 
-const renderer = new WebGLRenderer( { 
+const renderer = window.renderer = new WebGLRenderer( { 
 	antialias: true,
 	alpha: true
 } )
@@ -23,12 +23,13 @@ const renderer = new WebGLRenderer( {
 renderer.setPixelRatio( window.devicePixelRatio )
 set_renderer( renderer )
 
-
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = PCFSoftShadowMap
 
 renderer.domElement.id = 'custom-canvas'
-renderer.domElement.tabindex = 1
+// renderer.domElement.tabindex = 1
+
+document.body.appendChild( renderer.domElement )
 
 renderer.onWindowResize = function(){
 

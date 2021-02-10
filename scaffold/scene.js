@@ -3,6 +3,7 @@ import {
 } from './three.module.js'
 
 
-const scene = new Scene()
+const scene = window.scene = new Scene()
+
 
 export default scene

@@ -1,14 +1,14 @@
-import * as THREE from './three.module.js'
-import scene from './scene.js'
-import camera from './camera.js'
-import * as light from './light.js'
-
+import * as THREE from './scaffold/three.module.js'
+import scene from './scaffold/scene.js'
+import camera from './scaffold/camera.js'
+import * as light from './scaffold/light.js'
+import renderer from './scaffold/renderer.js'
 
 
 
 ////// sample init modifications
 scene.background = new THREE.Color( 0x222222 )
-scene.fog = new THREE.FogExp2( 0xffffff, .02 )
+// scene.fog = new THREE.FogExp2( 0xffffff, .02 )
 
 // light
 light.directional.position.set( 100, 100, 100 )
@@ -48,16 +48,16 @@ camera.lookAt( toon.mesh.position )
 
 
 
-
-////// and the animate loop
 const animate = () => {
 
 	requestAnimationFrame( animate )
 
+	renderer.render( scene, camera )
+
 }
 
-animate()
 
+animate()
 
 
 export default {}

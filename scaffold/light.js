@@ -14,7 +14,7 @@ const helper = new DirectionalLightHelper( directional )
 
 
 
-window.LIGHT = {
+window.light = {
 	directional: directional,
 	hemispherical: hemispherical,
 	spotlight: spotlight,
