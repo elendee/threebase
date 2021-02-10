@@ -1,11 +1,11 @@
 # threebase
 threejs scaffolding
 
-*You must write your own `custom.js` file, using es6 module `import`/`export`*
+Share a single file for quick collaboration.
 
-You can then share `custom.js` files with friends for quick collaboration.
+*threebase points to `custom.js` from `index.html` - you must write `custom.js` yourself, using es6 module `import`/`export`*
 
-Copy this sample `custom.js` template to get started:
+Here is a sample `custom.js` template to get started:
 ```js
 import * as THREE from './scaffold/three.module.js'
 import SCENE from './scaffold/SCENE.js'
