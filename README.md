@@ -1,7 +1,7 @@
 # threebase
 threejs scaffolding
 
-*You must write your own custom.js file, using es6 module `import`/`export`*
+*You must write your own `custom.js` file, using es6 module `import`/`export`*
 
 You can then share `custom.js` files with friends for quick collaboration.
 
