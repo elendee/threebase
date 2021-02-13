@@ -1,6 +1,5 @@
 .*
 !.gitignore
-custom.js
 node_modules/*
 customs/*
 resources/*
