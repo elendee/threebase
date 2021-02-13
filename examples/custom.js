@@ -40,7 +40,7 @@ CAMERA.lookAt(cubeMesh.position);
 animate();
 
 function animate() {
-	requestAnimationFrame(animate);
-	controls.update();
-	RENDERER.render(SCENE, CAMERA);
+    requestAnimationFrame(animate);
+    controls.update();
+    RENDERER.render(SCENE, CAMERA);
 }
