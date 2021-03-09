@@ -3,4 +3,5 @@
 node_modules/*
 customs/*
 resources/*
-
+package.json
+package-lock.json
