@@ -20,6 +20,111 @@ import { UnrealBloomPass } from '../node_modules/three/examples/jsm/postprocessi
 
 
 
+const addBloom = window.addBloom = obj => {
+
+	obj.layers.enable( BLOOM_LAYER )
+	materials[ obj.uuid ] = obj.material
+
+}
+
+const removeBloom = window.removeBloom = obj => {
+
+	obj.layers.disable( BLOOM_LAYER )
+	delete materials[ obj.uuid ]
+
+}
+
+
+
+
+
+const initGUI = () => {
+
+	const glow_indicator = document.createElement('div')
+	glow_indicator.classList.add('glow-indicator')
+	document.body.appendChild( glow_indicator )
+
+	const remove_indicator = document.createElement('div')
+	remove_indicator.classList.add('remove-indicator')
+	remove_indicator.innerHTML = '&times;'
+	document.body.appendChild( remove_indicator )
+
+	const glow_track = e => {
+		glow_indicator.style.left = e.clientX + 'px'
+		glow_indicator.style.top = e.clientY + 'px'
+	}
+
+	const remove_track = e => {
+		remove_indicator.style.left = e.clientX + 'px'
+		remove_indicator.style.top = e.clientY + 'px'
+	}
+
+	const addGlowClick = e => {
+
+		const intersect = RENDERER.get_clicked( e, false )
+		if( intersect ) addBloom( intersect.object )
+
+		glow_indicator.style.display = 'none'
+		document.body.removeEventListener('mousemove', glow_track )
+		document.body.removeEventListener('click', addGlowClick )
+	}
+
+	const removeGlowClick = e => {
+
+		const intersect = RENDERER.get_clicked( e, false )
+		if( intersect ) removeBloom( intersect.object )	
+
+		remove_indicator.style.display = 'none'
+		document.body.removeEventListener('mousemove', remove_track )
+		document.body.removeEventListener('click', removeGlowClick )
+
+	}
+
+	const addGlowState = e => {
+
+		e.stopPropagation()
+
+		glow_indicator.style.display = 'initial'
+		document.body.addEventListener('mousemove', glow_track )
+		document.body.addEventListener('click', addGlowClick )
+
+	}
+
+	const removeGlowState = e => {
+
+		e.stopPropagation()
+
+		remove_indicator.style.display = 'initial'
+		document.body.addEventListener('mousemove', remove_track )
+		document.body.addEventListener('click', removeGlowClick )
+
+	}
+
+	const add_glow = document.createElement('div')
+	add_glow.classList.add('button')
+	add_glow.style.top = '100px'
+	add_glow.innerText = 'add glow'
+	add_glow.addEventListener('click', addGlowState )
+	document.body.appendChild( add_glow )
+
+	const remove_glow = document.createElement('div')
+	remove_glow.classList.add('button')
+	remove_glow.style.top = '120px'
+	remove_glow.innerText = 'remove glow'
+	remove_glow.addEventListener('click', removeGlowState )
+	document.body.appendChild( remove_glow )
+
+}
+
+
+
+
+
+
+
+
+
+
 const vshader = document.createElement('script')
 vshader.type = 'x-shader/x-vertex'
 vshader.id = 'vertexshader'
@@ -120,24 +225,12 @@ const composeAnimate = () => {
 
 }
 
-const addBloom = window.addBloom = obj => {
-
-	obj.layers.enable( BLOOM_LAYER )
-	materials[ obj.uuid ] = obj.material
-
-}
-
-const removeBloom = window.removeBloom = obj => {
-
-	obj.layers.disable( BLOOM_LAYER )
-	delete materials[ obj.uuid ]
-
-}
 
 
 export {
 	composeAnimate,
 	addBloom,
 	removeBloom,
+	initGUI,
 }
 

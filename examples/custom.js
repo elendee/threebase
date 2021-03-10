@@ -7,10 +7,13 @@ import { OrbitControls } from '../scaffold/OrbitControls.js'
 
 import {
 	composeAnimate,
-	addBloom,
-	removeBloom
+	initGUI,
+	// addBloom,
+	// removeBloom
 } from '../plugins/ComposerSelectiveBloom.js'
 
+
+initGUI()
 
 const state = {
 	pending_cube: false,
@@ -49,6 +52,8 @@ const addCube = () => {
 
 }
 
+
+
 const add_cube = document.createElement('div')
 add_cube.classList.add('button')
 add_cube.style.top = '0px'
@@ -58,13 +63,13 @@ document.body.appendChild( add_cube )
 
 
 
+
 SCENE.background = new THREE.Color(0x000000)
 
 LIGHT.directional.position.set(100, 100, 100)
 SCENE.add(LIGHT.directional)
 
 const controls = new OrbitControls( CAMERA, RENDERER.domElement )
-const RAYCASTER = new THREE.Raycaster()
 
 const cubes = window.cubes = []
 
@@ -72,39 +77,30 @@ const cubes = window.cubes = []
 // const ground = window.ground = {}
 // const skybox = window.skybox = {}
 
-const handle_click = e => {
 
-	const x = ( e.clientX / RENDERER.domElement.clientWidth ) * 2 - 1
-	const y =  - ( e.clientY / RENDERER.domElement.clientHeight ) * 2 + 1
 
-	RAYCASTER.setFromCamera({
-		x: x, 
-		y: y
-	}, CAMERA )
 
-	const intersects = RAYCASTER.intersectObjects( SCENE.children, true ) // [ objects ], recursive (children) (ok to turn on if needed)
+const handle_clicked = e => {
 
-	if( intersects.length <= 0 ){ // 1 == skybox
-		return false
-	}	
+	const intersect = RENDERER.get_clicked( e, false )
 
-	// console.log( 'intersect: ', intersects[0] )
-
-	if( state.pending_cube ){
+	if( intersect && state.pending_cube ){
+		// state.pending_cube = intersect.object
 		SCENE.add( state.pending_cube )
-		state.pending_cube.position.copy( intersects[0].point )
+		state.pending_cube.position.copy( intersect.point )
 		state.pending_cube.position.y += ( state.pending_cube.userData.dimensions.y / 2 ) + .01 // ( so shadow is above )
+		delete state.pending_cube
+	}else{
 		delete state.pending_cube
 	}
 
 	document.removeEventListener('mousemove', tracking )
 	track_icon.style.display = 'none'
 
-	e.preventDefault();
-
 }
 
-window.addEventListener('pointerdown', handle_click, false )
+
+window.addEventListener('pointerdown', handle_clicked, false )
 
 
 

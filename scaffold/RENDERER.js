@@ -1,8 +1,13 @@
 import {
+	Raycaster,
+} from './three.module.js'
+
+import {
 	WebGLRenderer,
 	PCFSoftShadowMap,
 } from './three.module.js'
 
+const RAYCASTER = new Raycaster()
 
 
 const set_renderer = r => {  // for scaling resolution up or down
@@ -37,6 +42,30 @@ RENDERER.onWindowResize = function(){
 	set_renderer( RENDERER )
 
 }
+
+
+RENDERER.get_clicked = ( e, deep ) => {
+
+	e.preventDefault();
+
+	const x = ( e.clientX / RENDERER.domElement.clientWidth ) * 2 - 1
+	const y =  - ( e.clientY / RENDERER.domElement.clientHeight ) * 2 + 1
+
+	RAYCASTER.setFromCamera({
+		x: x, 
+		y: y
+	}, CAMERA )
+
+	const intersects = RAYCASTER.intersectObjects( SCENE.children, true ) // [ objects ], recursive (children) (ok to turn on if needed)
+
+	if( intersects.length <= 0 ){ // 1 == skybox
+		return false
+	}	
+
+	return deep ? intersects : intersects[0]
+
+}
+
 
 window.onresize = RENDERER.onWindowResize
 

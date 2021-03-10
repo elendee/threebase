@@ -36,3 +36,20 @@ body{
 	width: 20px;
 	height: 20px;
 }
+
+.glow-indicator,
+.remove-indicator{
+	position: fixed;
+	width: 50px;
+	height: 50px;
+	display: none;
+}
+.glow-indicator{
+	background: radial-gradient( white, transparent, transparent );
+}
+.remove-indicator{
+	font-size: 3rem;
+	background: none;
+	text-shadow: 0px 0px 5px white;
+}
+
