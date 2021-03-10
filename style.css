@@ -16,3 +16,23 @@ body{
 	padding: 100px;
 	transform: rotate(-10deg);
 }
+
+.button{
+	position: fixed;
+	z-index: 9;
+	right: 0px;
+	color: white;
+	padding: 5px;
+	font-family: monospace;
+	cursor: pointer;
+	border: 1px solid transparent;
+}
+.button:hover{
+	background: rgba(255, 255, 255, .2);
+	border: 1px solid black;
+}
+
+.tracker{
+	width: 20px;
+	height: 20px;
+}
