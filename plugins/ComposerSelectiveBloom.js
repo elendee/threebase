@@ -4,6 +4,7 @@ import {
 	ReinhardToneMapping,
 	ShaderMaterial,
 	MeshBasicMaterial,
+	DoubleSide,
 } from '../node_modules/three/build/three.module.js'
 
 import SCENE from '../scaffold/SCENE.js'
@@ -193,7 +194,7 @@ const finalComposer = new EffectComposer( RENDERER );
 finalComposer.addPass( renderScene )
 finalComposer.addPass( finalPass )
 
-const darkMaterial = new MeshBasicMaterial( { color: "black" } );
+const darkMaterial = new MeshBasicMaterial( { color: "black", side: DoubleSide } );
 const materials = {}
 
 function darkenNonBloomed( obj ) {
