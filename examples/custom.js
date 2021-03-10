@@ -7,13 +7,13 @@ import { OrbitControls } from '../scaffold/OrbitControls.js'
 
 import {
 	composeAnimate,
-	initGUI,
+	initSelectiveBloomGUI,
 	// addBloom,
 	// removeBloom
 } from '../plugins/ComposerSelectiveBloom.js'
 
 
-initGUI()
+initSelectiveBloomGUI()
 
 const state = {
 	pending_cube: false,
@@ -23,7 +23,7 @@ const track_icon = document.createElement('div')
 track_icon.classList.add('button', 'tracker')
 document.body.appendChild( track_icon )
 
-const tracking = e => {
+const track_add_cube = e => {
 	track_icon.style.left = e.clientX + 'px'
 	track_icon.style.top = e.clientY + 'px'
 }
@@ -36,7 +36,7 @@ const addCube = () => {
 
 	const cubeMesh = new THREE.Mesh(
 	    new THREE.BoxBufferGeometry( dimensions.x, dimensions.y, dimensions.z ),
-	    new THREE.MeshPhongMaterial({
+	    new THREE.MeshLambertMaterial({
 	        color: 0x2255ff,
 	    })
 	);
@@ -47,7 +47,7 @@ const addCube = () => {
 
 	state.pending_cube = cubeMesh
 
-	document.addEventListener('mousemove', tracking )
+	document.addEventListener('mousemove', track_add_cube )
 	track_icon.style.display = 'initial'
 
 }
@@ -66,16 +66,16 @@ document.body.appendChild( add_cube )
 
 SCENE.background = new THREE.Color(0x000000)
 
-LIGHT.directional.position.set(100, 100, 100)
-SCENE.add(LIGHT.directional)
+LIGHT.spotlight.position.set(50, 50, 50)
+SCENE.add(LIGHT.spotlight )
+SCENE.add(LIGHT.helper )
+
 
 const controls = new OrbitControls( CAMERA, RENDERER.domElement )
 
 const cubes = window.cubes = []
 
 
-// const ground = window.ground = {}
-// const skybox = window.skybox = {}
 
 
 
@@ -94,7 +94,7 @@ const handle_clicked = e => {
 		delete state.pending_cube
 	}
 
-	document.removeEventListener('mousemove', tracking )
+	document.removeEventListener('mousemove', track_add_cube )
 	track_icon.style.display = 'none'
 
 }
@@ -109,9 +109,9 @@ window.addEventListener('pointerdown', handle_clicked, false )
 const groundGeometry = new THREE.PlaneGeometry(100, 100, 1)
 const groundMesh = new THREE.Mesh(
     groundGeometry,
-    new THREE.MeshBasicMaterial({
+    new THREE.MeshLambertMaterial({
         color: 0xff4422,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
     })    
 )
 groundMesh.receiveShadow = true

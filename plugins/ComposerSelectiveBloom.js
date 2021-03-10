@@ -39,7 +39,7 @@ const removeBloom = window.removeBloom = obj => {
 
 
 
-const initGUI = () => {
+const initSelectiveBloomGUI = () => {
 
 	const glow_indicator = document.createElement('div')
 	glow_indicator.classList.add('glow-indicator')
@@ -151,7 +151,7 @@ document.body.appendChild( fshader )
 
 const bloom_params = {
 	exposure: 1,
-	strength: 1,
+	strength: 1.5,
 	threshold: 0,
 	radius: 0,
 }
@@ -232,6 +232,6 @@ export {
 	composeAnimate,
 	addBloom,
 	removeBloom,
-	initGUI,
+	initSelectiveBloomGUI,
 }
 
