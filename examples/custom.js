@@ -37,7 +37,7 @@ const addCube = () => {
 	const cubeMesh = new THREE.Mesh(
 	    new THREE.BoxBufferGeometry( dimensions.x, dimensions.y, dimensions.z ),
 	    new THREE.MeshPhongMaterial({
-	        color: 0xffcd75,
+	        color: 0x2255ff,
 	    })
 	);
 	cubeMesh.castShadow = true;
@@ -110,7 +110,7 @@ const groundGeometry = new THREE.PlaneGeometry(100, 100, 1)
 const groundMesh = new THREE.Mesh(
     groundGeometry,
     new THREE.MeshBasicMaterial({
-        color: 0xffcd75,
+        color: 0xff4422,
         side: THREE.DoubleSide
     })    
 )

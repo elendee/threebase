@@ -151,7 +151,7 @@ document.body.appendChild( fshader )
 
 const bloom_params = {
 	exposure: 1,
-	strength: 2,
+	strength: 1,
 	threshold: 0,
 	radius: 0,
 }

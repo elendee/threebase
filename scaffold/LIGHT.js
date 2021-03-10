@@ -7,7 +7,7 @@ import {
 
 
 
-const directional = new DirectionalLight( 0xffffff, .7 )
+const directional = new DirectionalLight( 0xffffff, 1 )
 directional.castShadow = true
 directional.shadowCameraNear = 10;
 directional.shadowCameraFar = 3200;
